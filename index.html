@@ -1,0 +1,2198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>레위기: 거룩함의 여정 | Leviticus: A Journey into Holiness</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+KR:wght@300;400;600;700&family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9A96E;
+  --gold-bright: #E8C97A;
+  --gold-light: #EDD9A3;
+  --gold-dim: rgba(201,169,110,0.35);
+  --ink: #0E0A04;
+  --ink2: #1A1208;
+  --ink3: #241A0A;
+  --parchment: #F2E8D0;
+  --parchment2: #E8D8B8;
+  --amber: #8B5E1A;
+  --crimson: #7A1C2A;
+  --azure: #173652;
+  --sage: #3A5530;
+  --inward-color: #A0673A;
+  --outward-color: #2A6080;
+  --pivot-glow: rgba(255,220,100,0.18);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--ink);
+  color: var(--parchment);
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* ═══════════════ LANG BAR ═══════════════ */
+#lang-bar {
+  position: fixed; top:0; left:0; right:0; z-index:200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 28px;
+  background: linear-gradient(to bottom, rgba(14,10,4,0.97) 80%, transparent);
+  border-bottom: 1px solid rgba(201,169,110,0.1);
+}
+.brand {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: rgba(201,169,110,0.5);
+  text-transform: uppercase;
+}
+.lang-btns { display:flex; gap:6px; }
+.lang-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  padding: 5px 14px;
+  border: 1px solid rgba(201,169,110,0.3);
+  background: transparent;
+  color: rgba(201,169,110,0.6);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.25s;
+}
+.lang-btn.active, .lang-btn:hover {
+  background: var(--gold); color: var(--ink);
+  border-color: var(--gold);
+}
+
+/* ═══════════════ PROGRESS BAR ═══════════════ */
+#progress-bar {
+  position: fixed; top: 41px; left:0; right:0; z-index:199;
+  height: 2px;
+  background: linear-gradient(90deg, var(--inward-color), var(--gold-bright), var(--outward-color));
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.1s linear;
+}
+
+/* ═══════════════ NAV DOTS ═══════════════ */
+#nav-dots {
+  position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
+  z-index:150;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.nav-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,169,110,0.4);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+}
+.nav-dot:hover::after, .nav-dot.active::after {
+  content: attr(data-label);
+  position: absolute;
+  right: 18px; top: 50%; transform: translateY(-50%);
+  white-space: nowrap;
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--gold-light);
+  background: rgba(14,10,4,0.9);
+  padding: 3px 8px;
+  border: 1px solid rgba(201,169,110,0.2);
+  pointer-events: none;
+}
+.nav-dot.active { background: var(--gold); border-color: var(--gold); }
+.nav-dot.inward { border-color: rgba(160,103,58,0.6); }
+.nav-dot.inward.active { background: var(--inward-color); border-color: var(--inward-color); }
+.nav-dot.pivot { border-color: var(--gold-bright); }
+.nav-dot.pivot.active { background: var(--gold-bright); border-color: var(--gold-bright); }
+.nav-dot.outward { border-color: rgba(42,96,128,0.6); }
+.nav-dot.outward.active { background: var(--outward-color); border-color: var(--outward-color); }
+
+/* ═══════════════ SECTIONS BASE ═══════════════ */
+.section {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 80px 5vw 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ═══════════════ SECTION 1 — HERO ═══════════════ */
+#s-hero {
+  align-items: center; text-align: center;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 40%, rgba(201,169,110,0.07) 0%, transparent 65%),
+    linear-gradient(180deg, var(--ink) 0%, var(--ink2) 100%);
+}
+#s-hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9A96E' fill-opacity='0.025'%3E%3Cpath d='M40 0L42 38 80 40 42 42 40 80 38 42 0 40 38 38z'/%3E%3C/g%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.hero-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 10px; letter-spacing: 0.45em;
+  color: var(--gold); text-transform: uppercase;
+  margin-bottom: 24px;
+  opacity:0; animation: fadeUp 1s 0.2s forwards;
+}
+.hero-title-main {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2.6rem, 7vw, 5.8rem);
+  line-height: 1.02;
+  color: var(--parchment);
+  opacity:0; animation: fadeUp 1s 0.4s forwards;
+}
+.hero-title-main em { color: var(--gold); font-style: italic; }
+.hero-title-ko {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2.8vw, 2rem);
+  color: var(--gold-light);
+  margin: 12px 0 36px;
+  opacity:0; animation: fadeUp 1s 0.6s forwards;
+}
+.stats-strip {
+  display: flex; gap: 0; flex-wrap: wrap; justify-content: center;
+  margin-bottom: 48px;
+  opacity:0; animation: fadeUp 1s 0.8s forwards;
+  border: 1px solid rgba(201,169,110,0.15);
+}
+.stat-block {
+  padding: 20px 36px;
+  border-right: 1px solid rgba(201,169,110,0.15);
+  text-align: center;
+}
+.stat-block:last-child { border-right: none; }
+.stat-n {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: var(--gold);
+  display: block; line-height: 1;
+}
+.stat-l {
+  font-size: 0.7rem; letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(242,232,208,0.45);
+  display: block; margin-top: 6px;
+}
+.stat-l-ko {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.68rem;
+  color: rgba(242,232,208,0.3);
+  display: block; margin-top: 3px;
+}
+.hero-desc {
+  max-width: 620px;
+  font-size: 0.95rem; line-height: 1.85;
+  color: rgba(242,232,208,0.65);
+  margin-bottom: 48px;
+  opacity:0; animation: fadeUp 1s 1s forwards;
+}
+.hero-desc .ko {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.88rem;
+  color: rgba(242,232,208,0.45);
+  display: block; margin-top: 10px;
+}
+.journey-start-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 11px; letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 14px 36px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  cursor: pointer;
+  transition: all 0.3s;
+  opacity:0; animation: fadeUp 1s 1.2s forwards;
+}
+.journey-start-btn:hover {
+  background: var(--gold); color: var(--ink);
+}
+
+/* ═══════════════ SECTION SHARED ═══════════════ */
+.sec-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 9px; letter-spacing: 0.45em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.sec-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(1.9rem, 3.5vw, 3rem);
+  line-height: 1.1; margin-bottom: 6px;
+}
+.sec-title-ko {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 300;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: var(--gold-light); margin-bottom: 8px;
+}
+.sec-desc {
+  font-size: 0.9rem; line-height: 1.8;
+  color: rgba(242,232,208,0.6);
+  max-width: 700px; margin-bottom: 40px;
+}
+.sec-desc .ko {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.84rem;
+  color: rgba(242,232,208,0.4);
+  display: block; margin-top: 8px;
+}
+
+/* ═══════════════ SECTION 2 — FIVE OFFERINGS ═══════════════ */
+#s-offerings {
+  background: linear-gradient(135deg, rgba(160,103,58,0.08) 0%, var(--ink2) 50%, var(--ink) 100%);
+  border-top: 1px solid rgba(160,103,58,0.2);
+}
+#s-offerings .sec-eyebrow { color: var(--inward-color); }
+.offerings-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+@media(max-width:800px){ .offerings-layout { grid-template-columns:1fr; } }
+.offerings-tabs {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.offering-tab {
+  display: flex; align-items: center; gap: 20px;
+  padding: 18px 22px;
+  border: 1px solid rgba(160,103,58,0.15);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+.offering-tab::before {
+  content:'';
+  position:absolute; left:0; top:0; bottom:0; width:3px;
+  background: var(--inward-color);
+  transform: scaleY(0); transition: transform 0.3s;
+}
+.offering-tab.active::before, .offering-tab:hover::before { transform: scaleY(1); }
+.offering-tab.active, .offering-tab:hover {
+  background: rgba(160,103,58,0.08);
+  border-color: rgba(160,103,58,0.35);
+}
+.ot-num {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem; letter-spacing: 0.2em;
+  color: rgba(160,103,58,0.5);
+  width: 24px; flex-shrink:0;
+}
+.ot-icon { font-size: 1.5rem; flex-shrink:0; }
+.ot-text { flex:1; }
+.ot-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; font-weight:600;
+  color: var(--gold-light);
+}
+.ot-name-ko {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.78rem;
+  color: rgba(242,232,208,0.4);
+  display:block;
+}
+.ot-ref {
+  font-size: 0.7rem; letter-spacing:0.1em;
+  color: rgba(160,103,58,0.6);
+}
+.offering-detail {
+  position: sticky; top: 80px;
+  padding: 40px 36px;
+  border: 1px solid rgba(160,103,58,0.2);
+  background: rgba(160,103,58,0.05);
+  min-height: 360px;
+  transition: all 0.4s;
+}
+.od-hebrew {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem; font-style: italic;
+  color: rgba(201,169,110,0.25);
+  margin-bottom: 8px;
+  display:block;
+}
+.od-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; font-weight:300;
+  color: var(--gold-light);
+  margin-bottom: 4px;
+}
+.od-title-ko {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.9rem;
+  color: rgba(242,232,208,0.5);
+  display:block; margin-bottom: 20px;
+}
+.od-desc {
+  font-size: 0.9rem; line-height: 1.85;
+  color: rgba(242,232,208,0.7);
+  margin-bottom: 16px;
+}
+.od-desc .ko {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.84rem;
+  color: rgba(242,232,208,0.45);
+  display:block; margin-top:8px;
+}
+.od-formation {
+  margin-top: 20px;
+  padding: 16px 18px;
+  border-left: 2px solid var(--inward-color);
+  background: rgba(160,103,58,0.06);
+}
+.od-formation-label {
+  font-family: 'Cinzel', serif;
+  font-size: 8px; letter-spacing: 0.3em;
+  color: var(--inward-color); text-transform: uppercase;
+  margin-bottom: 6px; display:block;
+}
+.od-formation-text {
+  font-size: 0.82rem; line-height:1.7;
+  color: rgba(242,232,208,0.55);
+  font-style: italic;
+}
+.od-formation-text .ko {
+  font-family: 'Noto Serif KR', serif;
+  display:block; margin-top:6px;
+  font-style:normal; font-size:0.78rem;
+  color: rgba(242,232,208,0.35);
+}
+
+/* ═══════════════ SECTION 3 — DOOR (Ch 1-16 intro) ═══════════════ */
+#s-inward {
+  align-items: center; text-align: center;
+  background:
+    radial-gradient(ellipse 60% 60% at 50% 50%, rgba(160,103,58,0.1) 0%, transparent 70%),
+    linear-gradient(180deg, var(--ink2) 0%, var(--ink) 100%);
+  border-top: 1px solid rgba(160,103,58,0.2);
+}
+.door-visual {
+  width: 160px; height: 200px;
+  margin: 0 auto 32px;
+  position: relative;
+  border: 2px solid rgba(201,169,110,0.3);
+  border-radius: 80px 80px 0 0;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  background: rgba(201,169,110,0.03);
+}
+.door-visual::before {
+  content:'';
+  position:absolute; inset:8px;
+  border: 1px solid rgba(201,169,110,0.15);
+  border-radius: 72px 72px 0 0;
+}
+.door-visual:hover {
+  border-color: rgba(201,169,110,0.6);
+  background: rgba(201,169,110,0.06);
+  box-shadow: 0 0 60px rgba(201,169,110,0.1);
+}
+.door-icon { font-size: 3rem; }
+.inward-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-style: italic;
+  color: var(--inward-color);
+  margin-bottom: 8px;
+}
+.inward-label-ko {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(1rem,2vw,1.5rem);
+  color: rgba(160,103,58,0.7);
+  margin-bottom: 24px; display:block;
+}
+
+/* ═══════════════ SECTION 4 — PIVOT YOM KIPPUR ═══════════════ */
+#s-pivot {
+  align-items: center; text-align: center;
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 50%, rgba(255,200,80,0.06) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 30% 70%, rgba(160,103,58,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 70% 30%, rgba(42,96,128,0.06) 0%, transparent 60%),
+    linear-gradient(180deg, var(--ink) 0%, #100C06 100%);
+  border-top: 1px solid rgba(255,200,80,0.15);
+  border-bottom: 1px solid rgba(255,200,80,0.15);
+}
+.pivot-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 9px; letter-spacing: 0.4em;
+  color: var(--gold-bright); text-transform: uppercase;
+  margin-bottom: 16px;
+  padding: 6px 20px;
+  border: 1px solid rgba(255,200,80,0.3);
+  display: inline-block;
+  background: rgba(255,200,80,0.05);
+}
+.pivot-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2.4rem,6vw,5rem);
+  line-height:1.05;
+  color: var(--parchment);
+}
+.pivot-title span { color: var(--gold-bright); }
+.pivot-title-ko {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 300;
+  font-size: clamp(1rem,2.5vw,1.8rem);
+  color: var(--gold-light);
+  margin: 12px 0 40px; display:block;
+}
+.pivot-arrows {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+.pa-side {
+  padding: 20px 32px;
+  font-family: 'Cinzel', serif;
+  font-size: 11px; letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+.pa-side.left { color: var(--inward-color); text-align:right; }
+.pa-side.right { color: var(--outward-color); text-align:left; }
+.pa-center {
+  padding: 24px 32px;
+  border: 1px solid rgba(255,200,80,0.3);
+  background: rgba(255,200,80,0.04);
+  position: relative;
+}
+.pa-center::before, .pa-center::after {
+  content:'';
+  position:absolute;
+  top:50%; transform:translateY(-50%);
+  width:0; height:0;
+  border-style:solid;
+}
+.pa-center::before {
+  left:-12px;
+  border-width:8px 12px 8px 0;
+  border-color: transparent rgba(160,103,58,0.4) transparent transparent;
+}
+.pa-center::after {
+  right:-12px;
+  border-width:8px 0 8px 12px;
+  border-color: transparent transparent transparent rgba(42,96,128,0.4);
+}
+.pa-center-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; font-style:italic;
+  color: var(--gold-bright);
+}
+.pa-center-ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:0.8rem; color:rgba(232,201,122,0.6);
+  display:block; margin-top:4px;
+}
+.pivot-verse {
+  max-width: 680px; margin: 0 auto 48px;
+  padding: 36px 40px;
+  border: 1px solid rgba(255,200,80,0.2);
+  background: rgba(255,200,80,0.03);
+  position:relative;
+}
+.pivot-verse::before,.pivot-verse::after {
+  content:'';
+  position:absolute;
+  width:32px; height:32px;
+  border-color: var(--gold-bright); border-style:solid;
+  opacity:0.4;
+}
+.pivot-verse::before { top:-1px; left:-1px; border-width:2px 0 0 2px; }
+.pivot-verse::after { bottom:-1px; right:-1px; border-width:0 2px 2px 0; }
+.pv-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem,2.2vw,1.5rem);
+  font-style: italic; font-weight:300;
+  line-height:1.55; color: var(--parchment);
+  margin-bottom: 10px;
+}
+.pv-text-ko {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(0.85rem,1.6vw,1.05rem);
+  font-weight:300;
+  line-height:1.7; color: var(--gold-light);
+  margin-bottom: 16px;
+}
+.pv-ref {
+  font-family:'Cinzel',serif;
+  font-size:0.7rem; letter-spacing:0.3em;
+  color: rgba(201,169,110,0.5);
+}
+
+/* HOLINESS LEVELS interactive */
+.holiness-container { width:100%; max-width:820px; margin:0 auto; }
+.holiness-track {
+  display:flex; flex-direction:column; gap:2px;
+}
+.h-row {
+  display:flex; align-items:stretch; gap:0;
+  cursor:pointer; transition:all 0.3s;
+  position:relative;
+}
+.h-row:hover .h-row-inner, .h-row.active .h-row-inner {
+  background: rgba(255,200,80,0.04);
+}
+.h-indent { flex-shrink:0; }
+.h-row-inner {
+  flex:1; display:flex; align-items:center; gap:20px;
+  padding:16px 24px;
+  border:1px solid rgba(201,169,110,0.1);
+  transition:all 0.3s;
+}
+.h-bar { width:4px; flex-shrink:0; border-radius:2px; }
+.h-icon { font-size:1.6rem; flex-shrink:0; width:40px; text-align:center; }
+.h-content { flex:1; }
+.h-name {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem; color:var(--gold-light); font-weight:600;
+}
+.h-name-ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:0.75rem; color:rgba(242,232,208,0.4);
+  display:block; margin-top:2px;
+}
+.h-expand {
+  max-height:0; overflow:hidden;
+  transition: max-height 0.4s ease;
+  font-size:0.82rem; line-height:1.75;
+  color:rgba(242,232,208,0.55);
+}
+.h-row.active .h-expand { max-height:120px; }
+.h-expand .ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:0.78rem; color:rgba(242,232,208,0.35);
+  display:block; margin-top:6px;
+}
+.h-chevron {
+  font-size:0.7rem; color:rgba(201,169,110,0.4);
+  transition:transform 0.3s; flex-shrink:0;
+}
+.h-row.active .h-chevron { transform:rotate(90deg); color:var(--gold); }
+
+/* ═══════════════ SECTION 5 — SEVEN FEASTS ═══════════════ */
+#s-feasts {
+  background:
+    radial-gradient(ellipse 50% 50% at 50% 50%, rgba(201,169,110,0.05) 0%, transparent 65%),
+    var(--ink2);
+  border-top: 1px solid rgba(201,169,110,0.15);
+}
+.feasts-layout {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:48px; align-items:start;
+}
+@media(max-width:800px){ .feasts-layout{grid-template-columns:1fr;} }
+
+/* Cycle Wheel */
+.feast-cycle {
+  position:relative; width:300px; height:300px;
+  margin:0 auto;
+}
+.cycle-svg { width:100%; height:100%; }
+.cycle-center-text {
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  text-align:center; pointer-events:none;
+}
+.cct-num {
+  font-family:'Cinzel Decorative',serif;
+  font-size:2.5rem; color:var(--gold);
+  display:block; line-height:1;
+}
+.cct-label {
+  font-family:'Cinzel',serif;
+  font-size:8px; letter-spacing:0.25em;
+  color:rgba(201,169,110,0.6); text-transform:uppercase;
+  display:block; margin-top:4px;
+}
+.cct-label-ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:9px; color:rgba(201,169,110,0.4);
+  display:block; margin-top:2px;
+}
+.feast-detail-panel {
+  padding:0;
+}
+.feast-list { display:flex; flex-direction:column; gap:2px; }
+.feast-item {
+  display:flex; align-items:center; gap:16px;
+  padding:14px 18px;
+  border:1px solid rgba(201,169,110,0.1);
+  cursor:pointer; transition:all 0.3s;
+  background:transparent;
+}
+.feast-item:hover, .feast-item.active {
+  border-color:rgba(201,169,110,0.3);
+  background:rgba(201,169,110,0.04);
+}
+.fi-dot {
+  width:32px; height:32px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1rem; flex-shrink:0;
+  border:1px solid rgba(201,169,110,0.2);
+  font-family:'Cinzel',serif; font-size:0.7rem;
+  color:var(--gold);
+}
+.feast-item.active .fi-dot {
+  background:var(--gold); color:var(--ink);
+  border-color:var(--gold);
+}
+.fi-text { flex:1; }
+.fi-name {
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.95rem; font-weight:600;
+  color:var(--gold-light);
+}
+.fi-name-ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:0.75rem; color:rgba(242,232,208,0.4);
+  display:block;
+}
+.fi-ref { font-size:0.68rem; letter-spacing:0.12em; color:rgba(201,169,110,0.4); }
+.fi-expand {
+  max-height:0; overflow:hidden;
+  font-size:0.82rem; line-height:1.75;
+  color:rgba(242,232,208,0.55);
+  transition: max-height 0.4s ease, padding 0.3s;
+  padding: 0 18px 0 66px;
+  border-left:1px solid transparent;
+  border-right:1px solid transparent;
+  border-bottom:1px solid transparent;
+}
+.feast-item.active + .fi-expand {
+  max-height:140px;
+  padding:12px 18px 16px 66px;
+  background:rgba(201,169,110,0.02);
+  border-color:rgba(201,169,110,0.1);
+}
+.fi-expand .ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:0.78rem; color:rgba(242,232,208,0.35);
+  display:block; margin-top:6px;
+}
+
+/* community formation callout */
+.formation-callout {
+  margin-top:24px;
+  padding:20px 24px;
+  border:1px solid rgba(201,169,110,0.15);
+  background:rgba(201,169,110,0.03);
+}
+.fc-label {
+  font-family:'Cinzel',serif;
+  font-size:8px; letter-spacing:0.3em;
+  color:var(--gold); text-transform:uppercase;
+  margin-bottom:10px; display:block;
+}
+.fc-text {
+  font-size:0.85rem; line-height:1.8;
+  color:rgba(242,232,208,0.6);
+}
+.fc-text .ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:0.8rem; color:rgba(242,232,208,0.38);
+  display:block; margin-top:8px;
+}
+
+/* ═══════════════ SECTION 6 — OUTWARD INTRO ═══════════════ */
+#s-outward {
+  align-items:center; text-align:center;
+  background:
+    radial-gradient(ellipse 60% 60% at 50% 50%, rgba(42,96,128,0.1) 0%, transparent 70%),
+    linear-gradient(180deg, var(--ink) 0%, var(--ink2) 100%);
+  border-top: 1px solid rgba(42,96,128,0.2);
+}
+.outward-label {
+  font-family:'Cormorant Garamond',serif;
+  font-size: clamp(2rem,4vw,3.5rem);
+  font-style:italic; color:var(--outward-color);
+  margin-bottom:8px;
+}
+.outward-label-ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(1rem,2vw,1.5rem);
+  color:rgba(42,96,128,0.7);
+  margin-bottom:24px; display:block;
+}
+
+/* ═══════════════ SECTION 7 — "I AM THE LORD" ═══════════════ */
+#s-iam {
+  background:
+    radial-gradient(ellipse 50% 40% at 50% 40%, rgba(201,169,110,0.08) 0%, transparent 65%),
+    var(--ink2);
+  border-top:1px solid rgba(201,169,110,0.15);
+}
+.iam-layout {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:48px; align-items:center;
+}
+@media(max-width:800px){ .iam-layout{grid-template-columns:1fr;} }
+.iam-counter-wrap { text-align:center; }
+.iam-orb {
+  width:220px; height:220px; border-radius:50%;
+  margin:0 auto 24px;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  border:1px solid rgba(201,169,110,0.25);
+  background:radial-gradient(ellipse at center, rgba(201,169,110,0.07) 0%, transparent 70%);
+  position:relative; cursor:pointer;
+  transition:all 0.5s;
+}
+.iam-orb:hover {
+  border-color:rgba(201,169,110,0.5);
+  box-shadow:0 0 60px rgba(201,169,110,0.12);
+}
+.iam-orb::before {
+  content:'';
+  position:absolute; inset:10px;
+  border-radius:50%;
+  border:1px solid rgba(201,169,110,0.1);
+}
+.iam-big {
+  font-family:'Cinzel Decorative',serif;
+  font-size:4rem; color:var(--gold);
+  display:block; line-height:1;
+}
+.iam-plus {
+  font-family:'Cinzel',serif;
+  font-size:0.8rem; letter-spacing:0.2em;
+  color:rgba(201,169,110,0.5);
+  display:block; margin-top:4px;
+}
+.iam-label {
+  font-family:'Cinzel',serif;
+  font-size:8px; letter-spacing:0.3em;
+  color:rgba(201,169,110,0.5); text-transform:uppercase;
+  display:block;
+}
+.iam-label-ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:9px; color:rgba(201,169,110,0.35);
+  display:block; margin-top:3px;
+}
+.iam-quote {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.3rem; font-style:italic;
+  color:var(--gold-light); line-height:1.5;
+  margin-bottom:12px;
+}
+.iam-quote-ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:0.9rem; color:rgba(201,169,110,0.6);
+  line-height:1.7; margin-bottom:16px;
+}
+.iam-ref {
+  font-family:'Cinzel',serif;
+  font-size:0.7rem; letter-spacing:0.2em;
+  color:rgba(201,169,110,0.4);
+}
+.iam-dots-grid {
+  display:flex; flex-wrap:wrap; gap:6px;
+  margin-top:20px; justify-content:center;
+}
+.iam-dot {
+  width:28px; height:28px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Cinzel',serif; font-size:0.6rem;
+  border:1px solid rgba(201,169,110,0.2);
+  color:rgba(201,169,110,0.4);
+  cursor:default; transition:all 0.3s;
+}
+.iam-dot.lit {
+  background:var(--gold); color:var(--ink);
+  border-color:var(--gold);
+  box-shadow:0 0 8px rgba(201,169,110,0.4);
+}
+
+/* ═══════════════ SECTION 8 — PURITY LAWS ═══════════════ */
+#s-purity {
+  background: linear-gradient(135deg, rgba(42,96,128,0.08) 0%, var(--ink) 60%);
+  border-top:1px solid rgba(42,96,128,0.15);
+}
+.purity-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:2px;
+  margin-top:40px;
+}
+@media(max-width:700px){ .purity-grid{grid-template-columns:1fr;} }
+.pg-card {
+  padding:32px 28px;
+  border:1px solid rgba(42,96,128,0.15);
+  background:transparent;
+  transition:all 0.3s; cursor:default;
+}
+.pg-card:hover {
+  background:rgba(42,96,128,0.06);
+  border-color:rgba(42,96,128,0.3);
+}
+.pg-icon { font-size:2rem; margin-bottom:16px; display:block; }
+.pg-cat {
+  font-family:'Cinzel',serif;
+  font-size:0.68rem; letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:rgba(42,96,128,0.7); margin-bottom:8px;
+}
+.pg-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem; color:var(--gold-light);
+  margin-bottom:4px;
+}
+.pg-title-ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:0.78rem; color:rgba(242,232,208,0.4);
+  display:block; margin-bottom:12px;
+}
+.pg-desc {
+  font-size:0.84rem; line-height:1.75;
+  color:rgba(242,232,208,0.55);
+}
+.pg-desc .ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:0.79rem; color:rgba(242,232,208,0.35);
+  display:block; margin-top:7px;
+}
+
+/* ═══════════════ SECTION 9 — JUBILEE ═══════════════ */
+#s-jubilee {
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(42,96,128,0.08) 0%, transparent 65%),
+    var(--ink2);
+  border-top:1px solid rgba(42,96,128,0.2);
+}
+.jubilee-layout {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:48px; align-items:center;
+}
+@media(max-width:800px){ .jubilee-layout{grid-template-columns:1fr;} }
+.jubilee-counter {
+  text-align:center;
+}
+.year-ring {
+  width:260px; height:260px; margin:0 auto 24px;
+  position:relative; cursor:pointer;
+}
+.yr-svg { width:100%; height:100%; }
+.yr-center {
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  text-align:center;
+}
+.yr-num {
+  font-family:'Cinzel Decorative',serif;
+  font-size:3.2rem; color:var(--outward-color);
+  display:block; line-height:1;
+}
+.yr-label {
+  font-family:'Cinzel',serif;
+  font-size:8px; letter-spacing:0.25em;
+  color:rgba(42,96,128,0.7); text-transform:uppercase;
+  display:block; margin-top:4px;
+}
+.yr-label-ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:9px; color:rgba(42,96,128,0.5);
+  display:block; margin-top:2px;
+}
+.jubilee-pillars {
+  display:flex; flex-direction:column; gap:12px;
+  margin-top:20px;
+}
+.jp-item {
+  display:flex; align-items:flex-start; gap:16px;
+  padding:16px 20px;
+  border:1px solid rgba(42,96,128,0.15);
+  transition:all 0.3s; cursor:default;
+}
+.jp-item:hover {
+  background:rgba(42,96,128,0.06);
+  border-color:rgba(42,96,128,0.3);
+}
+.jp-icon { font-size:1.5rem; flex-shrink:0; }
+.jp-text { flex:1; }
+.jp-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem; color:var(--gold-light);
+  margin-bottom:3px;
+}
+.jp-title-ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:0.75rem; color:rgba(242,232,208,0.4);
+  display:block; margin-bottom:6px;
+}
+.jp-desc {
+  font-size:0.82rem; line-height:1.7;
+  color:rgba(242,232,208,0.55);
+}
+.jp-desc .ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:0.78rem; color:rgba(242,232,208,0.35);
+  display:block; margin-top:5px;
+}
+
+/* ═══════════════ SECTION 10 — LOVE THE STRANGER ═══════════════ */
+#s-stranger {
+  background: linear-gradient(135deg, rgba(42,96,128,0.1) 0%, var(--ink) 60%);
+  border-top:1px solid rgba(42,96,128,0.15);
+}
+.stranger-layout {
+  display:grid; grid-template-columns:1.4fr 1fr;
+  gap:48px; align-items:center;
+}
+@media(max-width:800px){ .stranger-layout{grid-template-columns:1fr;} }
+.stranger-verse-block {
+  padding:48px 44px;
+  border:1px solid rgba(42,96,128,0.2);
+  background:rgba(42,96,128,0.04);
+  position:relative;
+}
+.stranger-verse-block::before,.stranger-verse-block::after {
+  content:''; position:absolute;
+  width:28px; height:28px;
+  border-color:var(--outward-color); border-style:solid;
+  opacity:0.4;
+}
+.stranger-verse-block::before { top:-1px; left:-1px; border-width:2px 0 0 2px; }
+.stranger-verse-block::after { bottom:-1px; right:-1px; border-width:0 2px 2px 0; }
+.sv-text {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.2rem,2.2vw,1.6rem);
+  font-style:italic; font-weight:300;
+  line-height:1.5; color:var(--parchment);
+  margin-bottom:12px;
+}
+.sv-text-ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(0.88rem,1.5vw,1.05rem);
+  font-weight:300; line-height:1.7;
+  color:var(--gold-light); margin-bottom:16px;
+}
+.sv-ref {
+  font-family:'Cinzel',serif;
+  font-size:0.7rem; letter-spacing:0.25em;
+  color:rgba(42,96,128,0.7);
+}
+.stranger-sidebar {
+  display:flex; flex-direction:column; gap:16px;
+}
+.ss-item {
+  padding:20px 22px;
+  border:1px solid rgba(42,96,128,0.15);
+  transition:all 0.3s;
+}
+.ss-item:hover {
+  background:rgba(42,96,128,0.06);
+  border-color:rgba(42,96,128,0.3);
+  transform:translateX(4px);
+}
+.ss-icon { font-size:1.4rem; margin-bottom:8px; display:block; }
+.ss-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.95rem; color:var(--gold-light); margin-bottom:3px;
+}
+.ss-title-ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:0.74rem; color:rgba(242,232,208,0.4);
+  display:block; margin-bottom:7px;
+}
+.ss-desc {
+  font-size:0.82rem; line-height:1.7;
+  color:rgba(242,232,208,0.55);
+}
+.ss-desc .ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:0.78rem; color:rgba(242,232,208,0.35);
+  display:block; margin-top:5px;
+}
+
+/* ═══════════════ SECTION 11 — HOLINESS MANDATE ═══════════════ */
+#s-mandate {
+  align-items:center; text-align:center;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,169,110,0.07) 0%, transparent 65%),
+    linear-gradient(180deg, var(--ink2) 0%, var(--ink) 100%);
+  border-top:1px solid rgba(201,169,110,0.2);
+}
+.mandate-quote {
+  max-width:720px; margin:0 auto 48px;
+  padding:56px 48px;
+  border:1px solid rgba(201,169,110,0.2);
+  background:radial-gradient(ellipse at center, rgba(201,169,110,0.05) 0%, transparent 70%);
+  position:relative;
+}
+.mandate-quote::before,.mandate-quote::after {
+  content:''; position:absolute;
+  width:36px; height:36px;
+  border-color:var(--gold); border-style:solid;
+  opacity:0.4;
+}
+.mandate-quote::before { top:-1px; left:-1px; border-width:2px 0 0 2px; }
+.mandate-quote::after { bottom:-1px; right:-1px; border-width:0 2px 2px 0; }
+.mq-text {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.4rem,3vw,2.2rem);
+  font-weight:300; font-style:italic;
+  line-height:1.4; color:var(--parchment);
+  margin-bottom:14px;
+}
+.mq-text-ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(0.95rem,2vw,1.35rem);
+  font-weight:300;
+  line-height:1.7; color:var(--gold-light);
+  margin-bottom:20px;
+}
+.mq-ref {
+  font-family:'Cinzel',serif;
+  font-size:0.75rem; letter-spacing:0.3em;
+  color:rgba(201,169,110,0.5);
+}
+.mandate-where-who-what {
+  display:flex; gap:0; flex-wrap:wrap;
+  justify-content:center; max-width:720px; margin:0 auto;
+}
+.mww-item {
+  flex:1; min-width:180px;
+  padding:28px 24px;
+  border:1px solid rgba(201,169,110,0.12);
+  text-align:left; transition:all 0.3s; cursor:default;
+}
+.mww-item:hover {
+  background:rgba(201,169,110,0.04);
+  border-color:rgba(201,169,110,0.3);
+}
+.mww-key {
+  font-family:'Cinzel Decorative',serif;
+  font-size:1.8rem; color:rgba(201,169,110,0.3);
+  display:block; margin-bottom:12px;
+}
+.mww-q {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem; color:var(--gold-light);
+  margin-bottom:3px;
+}
+.mww-q-ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:0.78rem; color:rgba(242,232,208,0.4);
+  display:block; margin-bottom:10px;
+}
+.mww-a {
+  font-size:0.83rem; line-height:1.75;
+  color:rgba(242,232,208,0.6);
+}
+.mww-a .ko {
+  font-family:'Noto Serif KR',serif;
+  font-size:0.78rem; color:rgba(242,232,208,0.38);
+  display:block; margin-top:6px;
+}
+
+/* ═══════════════ JOURNEY SPINE ═══════════════ */
+.journey-spine {
+  position:fixed; left:20px; top:50%;
+  transform:translateY(-50%);
+  z-index:150;
+  display:flex; flex-direction:column;
+  align-items:center; gap:6px;
+}
+.spine-label {
+  font-family:'Cinzel',serif;
+  font-size:8px; letter-spacing:0.3em;
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  transform:rotate(180deg);
+  color:rgba(201,169,110,0.3);
+  text-transform:uppercase;
+  user-select:none;
+}
+
+/* ═══════════════ ANIMATIONS ═══════════════ */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes glow-pulse {
+  0%,100% { box-shadow:0 0 20px rgba(255,200,80,0.08); }
+  50%      { box-shadow:0 0 40px rgba(255,200,80,0.18); }
+}
+@keyframes iam-light {
+  0%,100% { opacity:0.4; }
+  50%      { opacity:1; }
+}
+@keyframes ring-spin {
+  from { transform:rotate(0deg); }
+  to   { transform:rotate(360deg); }
+}
+.reveal {
+  opacity:0; transform:translateY(22px);
+  transition: opacity 0.7s, transform 0.7s;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* pivot pulse */
+#s-pivot { animation: glow-pulse 4s ease-in-out infinite; }
+
+/* ═══════════════ LANG BEHAVIOR ═══════════════ */
+.en { }
+.ko { display:none; }
+body.ko-mode .en { display:none; }
+body.ko-mode .ko { display:block; }
+.en-inline { }
+.ko-inline { display:none; }
+body.ko-mode .en-inline { display:none; }
+body.ko-mode .ko-inline { display:inline; }
+
+/* fix: ko inside flex/grid */
+body.ko-mode .ko { display:block; }
+body:not(.ko-mode) .ko { display:none; }
+
+/* dividers */
+.hairline {
+  width:100%; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,169,110,0.15),transparent);
+}
+.tag {
+  display:inline-block; padding:3px 12px;
+  font-size:0.68rem; letter-spacing:0.18em;
+  text-transform:uppercase;
+  border:1px solid; border-radius:2px;
+}
+.tag-in { border-color:rgba(160,103,58,0.4); color:#C08050; background:rgba(160,103,58,0.07); }
+.tag-out { border-color:rgba(42,96,128,0.4); color:#70A8C0; background:rgba(42,96,128,0.07); }
+.tag-pivot { border-color:rgba(201,169,110,0.4); color:var(--gold); background:rgba(201,169,110,0.07); }
+
+/* scroll hint */
+.scroll-hint {
+  position:absolute; bottom:28px; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  opacity:0.4; animation:fadeUp 1s 1.5s forwards;
+}
+.sh-line { width:1px; height:36px; background:linear-gradient(to bottom,var(--gold),transparent); animation:iam-light 2s infinite; }
+.sh-label { font-family:'Cinzel',serif; font-size:8px; letter-spacing:0.3em; color:var(--gold); text-transform:uppercase; }
+</style>
+</head>
+<body>
+
+<!-- ══ LANG BAR ══ -->
+<div id="lang-bar">
+  <span class="brand"><span class="en-inline">Leviticus</span><span class="ko-inline">레위기</span> · <span class="en-inline">Holiness Journey</span><span class="ko-inline">거룩함의 여정</span></span>
+  <div class="lang-btns">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="btn-ko" onclick="setLang('ko')">한국어</button>
+  </div>
+</div>
+
+<!-- ══ PROGRESS BAR ══ -->
+<div id="progress-bar"></div>
+
+<!-- ══ NAV DOTS ══ -->
+<div id="nav-dots">
+  <div class="nav-dot active" data-section="s-hero" data-label="Start · 시작" onclick="scrollTo('s-hero')"></div>
+  <div class="nav-dot inward" data-section="s-offerings" data-label="Five Offerings · 5가지 제사" onclick="scrollTo('s-offerings')"></div>
+  <div class="nav-dot inward" data-section="s-inward" data-label="Inward · 안으로" onclick="scrollTo('s-inward')"></div>
+  <div class="nav-dot pivot" data-section="s-pivot" data-label="Yom Kippur · 대속죄일" onclick="scrollTo('s-pivot')"></div>
+  <div class="nav-dot" data-section="s-feasts" data-label="Seven Feasts · 7가지 절기" onclick="scrollTo('s-feasts')"></div>
+  <div class="nav-dot outward" data-section="s-outward" data-label="Outward · 밖으로" onclick="scrollTo('s-outward')"></div>
+  <div class="nav-dot outward" data-section="s-iam" data-label="I Am the LORD · 나는 여호와" onclick="scrollTo('s-iam')"></div>
+  <div class="nav-dot outward" data-section="s-purity" data-label="Purity Laws · 정결 규례" onclick="scrollTo('s-purity')"></div>
+  <div class="nav-dot outward" data-section="s-jubilee" data-label="Jubilee · 희년" onclick="scrollTo('s-jubilee')"></div>
+  <div class="nav-dot outward" data-section="s-stranger" data-label="Love Stranger · 나그네 사랑" onclick="scrollTo('s-stranger')"></div>
+  <div class="nav-dot" data-section="s-mandate" data-label="Be Holy · 거룩하라" onclick="scrollTo('s-mandate')"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- SECTION 1 — HERO                                      -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="s-hero">
+  <div class="hero-eyebrow"><span class="en-inline">The Book of Leviticus · 1445 BC · Sinai Wilderness</span><span class="ko-inline">레위기 · BC 1445 · 시내산 광야</span></div>
+  <h1 class="hero-title-main">
+    <span class="en-inline">Leviticus:<br>A Journey into <em>Holiness</em></span>
+    <span class="ko-inline">레위기:<br>숫자로 보는 <em>거룩함의 여정</em></span>
+  </h1>
+  <div class="hero-title-ko">
+    <span class="en-inline">레위기: 숫자로 보는 거룩함의 여정</span>
+    <span class="ko-inline">Leviticus: A Journey into Holiness through Numbers</span>
+  </div>
+
+  <div class="stats-strip">
+    <div class="stat-block">
+      <span class="stat-n">27</span>
+      <span class="stat-l"><span class="en-inline">Chapters</span><span class="ko-inline">장</span></span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-n">850</span>
+      <span class="stat-l"><span class="en-inline">Verses</span><span class="ko-inline">절</span></span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-n">18,962</span>
+      <span class="stat-l"><span class="en-inline">Words</span><span class="ko-inline">단어</span></span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-n">1445</span>
+      <span class="stat-l"><span class="en-inline">BC · Sinai Covenant</span><span class="ko-inline">BC · 시내산 언약</span></span>
+    </div>
+  </div>
+
+  <p class="hero-desc">
+    <span class="en-inline">Given to Israel in the Sinai wilderness after the Exodus, Leviticus is God's manual for holy living. It moves in two great arcs: <strong>Chapters 1–16</strong> — how to draw near to God (inward movement); <strong>Chapters 17–27</strong> — how to embody that nearness in daily life (outward movement). The hinge is <strong>Yom Kippur (ch. 16)</strong>.</span>
+    <span class="ko-inline">출애굽 이후 시내산 광야에서 주어진 거룩한 삶의 매뉴얼입니다. 두 개의 큰 흐름으로 구성됩니다: <strong>1–16장</strong> — 하나님께 나아가는 법(안으로의 이동); <strong>17–27장</strong> — 하나님의 임재를 일상 속에서 증명하는 법(밖으로의 이동). 그 중심축은 <strong>대속죄일(16장)</strong>입니다.</span>
+  </p>
+
+  <button class="journey-start-btn" onclick="scrollTo('s-offerings')">
+    <span class="en-inline">Begin the Journey ↓</span>
+    <span class="ko-inline">여정을 시작하다 ↓</span>
+  </button>
+
+  <div class="scroll-hint">
+    <div class="sh-line"></div>
+    <span class="sh-label"><span class="en-inline">Scroll</span><span class="ko-inline">스크롤</span></span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- SECTION 2 — FIVE OFFERINGS                            -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="s-offerings">
+  <div class="sec-eyebrow reveal" style="color:var(--inward-color)">
+    <span class="en-inline">① Chapters 1–7 · Inward Movement · 안으로의 이동</span>
+    <span class="ko-inline">① 1–7장 · 안으로의 이동 · Inward Movement</span>
+  </div>
+  <h2 class="sec-title reveal">
+    <span class="en-inline">Five Offerings — Five Ways to <em style="color:var(--gold)">Draw Near</em></span>
+    <span class="ko-inline">5가지 제사를 통한 <em style="color:var(--gold)">관계의 회복</em></span>
+  </h2>
+  <p class="sec-title-ko reveal">
+    <span class="en-inline">번제, 소제, 화목제, 속죄제, 속건제는 하나님의 일제 몸심부로 나아가는 5가지 방향을 제시합니다</span>
+    <span class="ko-inline">Burnt, grain, peace, sin, and guilt offerings — five directions toward God's presence</span>
+  </p>
+
+  <div class="offerings-layout reveal">
+    <div class="offerings-tabs" id="offerings-tabs">
+      <!-- tabs injected by JS -->
+    </div>
+    <div class="offering-detail" id="offering-detail">
+      <!-- detail injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- SECTION 3 — INWARD INTRO (Door)                       -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="s-inward">
+  <div style="z-index:1;position:relative;text-align:center;">
+    <div class="sec-eyebrow reveal" style="color:var(--inward-color)">
+      <span class="en-inline">② Chapters 1–16 · The Journey Inward</span>
+      <span class="ko-inline">② 1–16장 · 안으로의 이동</span>
+    </div>
+    <div class="door-visual reveal" onclick="scrollTo('s-pivot')">
+      <div class="door-icon">🚪</div>
+    </div>
+    <div class="inward-label reveal">
+      <span class="en-inline">Moving <em>Inward</em></span>
+      <span class="ko-inline"><em>안으로의</em> 이동</span>
+    </div>
+    <span class="inward-label-ko reveal">
+      <span class="en-inline">안으로의 이동</span>
+      <span class="ko-inline">Moving Inward toward God</span>
+    </span>
+    <p class="sec-desc reveal" style="max-width:580px;margin:0 auto 32px;">
+      <span class="en-inline">Through priestly regulations, the purity system, and the five offerings, chapters 1–16 build a liturgical architecture that moves Israel from the ordinary toward the holy — from the camp to the courtyard to the sanctuary to the Holy of Holies. Every law is a route. Every ritual is a passage.</span>
+      <span class="ko-inline">제사 규례, 정결법, 다섯 가지 제사를 통해 1–16장은 이스라엘을 일상에서 거룩함으로, 진영에서 뜰로, 성소에서 지성소로 이동시키는 전례적 구조를 세웁니다. 모든 법은 경로이고, 모든 의식은 통로입니다.</span>
+    </p>
+    <span class="tag tag-in"><span class="en-inline">Ch 1–16 · Approaching God</span><span class="ko-inline">1–16장 · 하나님께 나아감</span></span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- SECTION 4 — PIVOT: YOM KIPPUR + HOLINESS LEVELS       -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="s-pivot">
+  <div style="z-index:1;position:relative;width:100%;max-width:900px;margin:0 auto;">
+    <div class="pivot-badge reveal">
+      <span class="en-inline">③④ Chapter 16 · The Great Hinge · The Pivot Point</span>
+      <span class="ko-inline">③④ 16장 · 중심축 · 전환점</span>
+    </div>
+    <h2 class="pivot-title reveal">
+      <span class="en-inline">Yom Kippur —<br><span>Day of Atonement</span></span>
+      <span class="ko-inline">대속죄일 (Yom Kippur) —<br><span>대속죄의 날</span></span>
+    </h2>
+    <span class="pivot-title-ko reveal">
+      <span class="en-inline">레위기 16장: 대속죄일(Yom Kippur)</span>
+      <span class="ko-inline">Leviticus 16: The Day of Atonement</span>
+    </span>
+
+    <div class="pivot-arrows reveal">
+      <div class="pa-side left">
+        <span class="en-inline">← Inward<br>Ch 1–16</span>
+        <span class="ko-inline" style="font-family:'Noto Serif KR',serif;font-size:0.85rem;">← 안으로<br>1–16장</span>
+      </div>
+      <div class="pa-center">
+        <div class="pa-center-text">
+          <span class="en-inline">Leviticus 16</span>
+          <span class="ko-inline">레위기 16장</span>
+        </div>
+        <span class="pa-center-ko">
+          <span class="en-inline">레위기 16장</span>
+          <span class="ko-inline">Leviticus 16</span>
+        </span>
+      </div>
+      <div class="pa-side right">
+        <span class="en-inline">Outward →<br>Ch 17–27</span>
+        <span class="ko-inline" style="font-family:'Noto Serif KR',serif;font-size:0.85rem;">밖으로 →<br>17–27장</span>
+      </div>
+    </div>
+
+    <div class="pivot-verse reveal">
+      <p class="pv-text">
+        <span class="en-inline">"For on this day atonement shall be made for you, to cleanse you. You shall be clean before the LORD from all your sins."</span>
+        <span class="ko-inline">"이 날에 너희를 위하여 속죄하여 너희를 정결하게 할 것이니 너희의 모든 죄에서 너희가 여호와 앞에 정결하리라."</span>
+      </p>
+      <p class="pv-text-ko">
+        <span class="en-inline">이 날에 너희를 위하여 속죄하여...</span>
+        <span class="ko-inline">For on this day atonement shall be made...</span>
+      </p>
+      <span class="pv-ref">Leviticus 16:30 · 레위기 16:30</span>
+    </div>
+
+    <!-- ⑤ 6-Level Holiness -->
+    <div class="sec-eyebrow reveal" style="text-align:center;color:var(--gold);margin-bottom:16px;">
+      <span class="en-inline">⑤ Six Levels of Sacred Space — 6단계의 공건직 거룩함</span>
+      <span class="ko-inline">⑤ 6단계의 공건직 거룩함 — Six Levels of Sacred Space</span>
+    </div>
+    <p class="sec-desc reveal" style="text-align:center;margin:0 auto 24px;max-width:600px;">
+      <span class="en-inline">From the nations to the Holy of Holies — six concentric zones of increasing holiness. Click each level to expand.</span>
+      <span class="ko-inline">이방 나라부터 지성소까지 — 거룩함이 점층적으로 증가하는 여섯 개의 동심원 지대. 각 단계를 클릭하면 열립니다.</span>
+    </p>
+
+    <div class="holiness-container reveal">
+      <div class="holiness-track" id="holiness-track">
+        <!-- injected by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- SECTION 5 — SEVEN FEASTS                              -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="s-feasts">
+  <div class="sec-eyebrow reveal" style="color:var(--gold)">
+    <span class="en-inline">⑧ Chapter 23 · Seven Feasts — Time Made Holy · 7가지 절기</span>
+    <span class="ko-inline">⑧ 23장 · 7가지 절기 — 거룩하게 된 시간 · Seven Feasts</span>
+  </div>
+  <h2 class="sec-title reveal">
+    <span class="en-inline">Seven Feasts — <em style="color:var(--gold)">The Community's Sacred Rhythm</em></span>
+    <span class="ko-inline">7가지 절기 — <em style="color:var(--gold)">공동체의 거룩한 리듬</em></span>
+  </h2>
+  <p class="sec-desc reveal">
+    <span class="en-inline">From Passover to Tabernacles, the seven feasts are not merely religious holidays — they are <em>time structured as formation</em>. Each year's rhythm from Passover to Sukkot rehearses the entire story of redemption and shapes communal identity through repetition.</span>
+    <span class="ko-inline">유월절부터 초막절까지, 7가지 절기는 단순한 종교적 휴일이 아닙니다 — <em>형성으로서의 구조화된 시간</em>입니다. 유월절에서 초막절까지 매년 반복되는 리듬은 구속의 이야기 전체를 되살리고 반복을 통해 공동체의 정체성을 형성합니다.</span>
+  </p>
+
+  <div class="feasts-layout reveal">
+    <div>
+      <!-- SVG Wheel -->
+      <div class="feast-cycle" id="feast-cycle">
+        <svg class="cycle-svg" viewBox="0 0 300 300" id="feast-svg"></svg>
+        <div class="cycle-center-text">
+          <span class="cct-num">7</span>
+          <span class="cct-label"><span class="en-inline">Sacred Feasts</span><span class="ko-inline">거룩한 절기</span></span>
+          <span class="cct-label-ko"><span class="en-inline">거룩한 절기</span><span class="ko-inline">Sacred Feasts</span></span>
+        </div>
+      </div>
+
+      <div class="formation-callout">
+        <span class="fc-label"><span class="en-inline">⑧ Community Formation through Time · 시간의 성별</span><span class="ko-inline">⑧ 시간의 성별 · Community Formation through Time</span></span>
+        <p class="fc-text">
+          <span class="en-inline">Year after year, from Passover to Tabernacles, the rhythmic repetition of the feasts shapes the community's identity — rehearsing the exodus, celebrating the harvest, rehearsing atonement, and anticipating the final dwelling of God with his people.</span>
+          <span class="ko-inline">유월절부터 초막절까지 해마다 반복되는 절기의 리듬이 공동체의 정체성을 형성합니다 — 출애굽을 되새기고, 추수를 감사하고, 속죄를 준비하며, 하나님이 백성과 함께 거하실 종말적 날을 기대합니다.</span>
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <div class="feast-list" id="feast-list">
+        <!-- injected by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- SECTION 6 — OUTWARD TRANSITION                        -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="s-outward">
+  <div style="z-index:1;position:relative;text-align:center;">
+    <div class="sec-eyebrow reveal" style="color:var(--outward-color)">
+      <span class="en-inline">⑥ Chapters 17–27 · The Journey Outward</span>
+      <span class="ko-inline">⑥ 17–27장 · 밖으로의 이동</span>
+    </div>
+    <div class="door-visual reveal" style="transform:scaleX(-1)" onclick="scrollTo('s-iam')">
+      <div class="door-icon" style="transform:scaleX(-1)">🌍</div>
+    </div>
+    <div class="outward-label reveal">
+      <span class="en-inline">Moving <em>Outward</em></span>
+      <span class="ko-inline"><em>밖으로의</em> 이동</span>
+    </div>
+    <span class="outward-label-ko reveal">
+      <span class="en-inline">밖으로의 이동</span>
+      <span class="ko-inline">Moving Outward into the World</span>
+    </span>
+    <p class="sec-desc reveal" style="max-width:580px;margin:0 auto 32px;">
+      <span class="en-inline">Chapters 17–27 — the Holiness Code — send Israel outward into daily life, communal relationships, and economic structures. Holiness obtained in the sanctuary must now be embodied in the world: in what we eat, how we treat the stranger, and how we structure economic justice.</span>
+      <span class="ko-inline">17–27장(성결법전)은 이스라엘을 일상 생활, 공동체 관계, 경제 구조 속으로 내보냅니다. 성소에서 얻은 거룩함은 이제 세상 속에서 구현되어야 합니다: 무엇을 먹는지, 나그네를 어떻게 대하는지, 경제적 정의를 어떻게 구조화하는지에서.</span>
+    </p>
+    <span class="tag tag-out"><span class="en-inline">Ch 17–27 · Embodied Holiness</span><span class="ko-inline">17–27장 · 구현된 거룩함</span></span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- SECTION 7 — "I AM THE LORD" 16×                       -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="s-iam">
+  <div class="sec-eyebrow reveal" style="color:var(--gold)">
+    <span class="en-inline">⑦ Chapter 19 · "I Am the LORD" · Repeated 16+ Times</span>
+    <span class="ko-inline">⑦ 19장 · "나는 여호와이니라" · 16회 이상 반복</span>
+  </div>
+  <h2 class="sec-title reveal">
+    <span class="en-inline">"I Am the LORD" — <em style="color:var(--gold)">The Ground of Every Law</em></span>
+    <span class="ko-inline">"나는 여호와이니라" — <em style="color:var(--gold)">모든 법의 근거</em></span>
+  </h2>
+
+  <div class="iam-layout reveal">
+    <div class="iam-counter-wrap">
+      <div class="iam-orb" id="iam-orb">
+        <span class="iam-big" id="iam-count">0</span>
+        <span class="iam-plus">+</span>
+        <span class="iam-label"><span class="en-inline">Repetitions</span><span class="ko-inline">반복 횟수</span></span>
+        <span class="iam-label-ko"><span class="en-inline">레위기 19장</span><span class="ko-inline">Leviticus 19</span></span>
+      </div>
+      <div class="iam-dots-grid" id="iam-dots"></div>
+    </div>
+    <div>
+      <div class="iam-quote">
+        <span class="en-inline">"Be holy, for I the LORD your God am holy."</span>
+        <span class="ko-inline">"나 여호와 너희 하나님이 거룩하니 너희도 거룩할지어다."</span>
+      </div>
+      <p class="iam-quote-ko">
+        <span class="en-inline">나 여호와 너희 하나님이 거룩하니 너희도 거룩할지어다</span>
+        <span class="ko-inline">Be holy, for I the LORD your God am holy</span>
+      </p>
+      <span class="iam-ref">Leviticus 19:2 · 레위기 19:2</span>
+      <div style="margin-top:28px;padding:20px 22px;border:1px solid rgba(201,169,110,0.15);background:rgba(201,169,110,0.03);">
+        <span class="od-formation-label"><span class="en-inline">⑦ Foundation of All Culture · 모든 문화의 근거</span><span class="ko-inline">⑦ 모든 문화의 근거 · Foundation of All Culture</span></span>
+        <p class="od-formation-text">
+          <span class="en-inline">This repeated phrase is not a legal formula — it is a theological anchor. Every command about food, sex, economics, or social relations hangs on the character of God. Obedience is not performance; it is participation in God's own nature.</span>
+          <span class="ko-inline">이 반복되는 문구는 법적 공식이 아닙니다 — 신학적 닻입니다. 음식, 성, 경제, 사회 관계에 관한 모든 명령은 하나님의 성품에 매달려 있습니다. 순종은 수행이 아니라 하나님의 본성에의 참여입니다.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- SECTION 8 — PURITY LAWS (Ch 11–15)                    -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="s-purity">
+  <div class="sec-eyebrow reveal" style="color:var(--outward-color)">
+    <span class="en-inline">⑩ Chapters 11–15 · Five Chapters on Purity · 5개 장: 정결 규례</span>
+    <span class="ko-inline">⑩ 11–15장 · 정결 규례 · Five Chapters on Purity</span>
+  </div>
+  <h2 class="sec-title reveal">
+    <span class="en-inline">Clean & Unclean — <em style="color:var(--gold)">Bodies as Theology</em></span>
+    <span class="ko-inline">정결과 부정 — <em style="color:var(--gold)">몸이 곧 신학</em></span>
+  </h2>
+  <p class="sec-desc reveal">
+    <span class="en-inline">Five chapters (11–15) govern food, skin disease, bodily discharges, and contamination — all mapped onto the sacred/ordinary boundary. The body is not incidental to holiness; it is the primary site of holiness. What Israel eats, touches, and experiences marks them as belonging to God.</span>
+    <span class="ko-inline">다섯 장(11–15장)은 음식, 피부병, 몸의 유출물, 오염을 다룹니다 — 모두 거룩함/일상의 경계에 매핑됩니다. 몸은 거룩함에 부차적인 것이 아니라 거룩함의 주요 장소입니다. 이스라엘이 먹고, 만지고, 경험하는 것이 그들을 하나님의 소유로 표시합니다.</span>
+  </p>
+
+  <div class="purity-grid reveal">
+    <div class="pg-card">
+      <span class="pg-icon">🍽️</span>
+      <span class="pg-cat"><span class="en-inline">Ch 11 · Food</span><span class="ko-inline">11장 · 음식</span></span>
+      <div class="pg-title"><span class="en-inline">Dietary Laws</span><span class="ko-inline">음식 규례</span></div>
+      <span class="pg-title-ko"><span class="en-inline">음식 규례</span><span class="ko-inline">Dietary Laws</span></span>
+      <p class="pg-desc">
+        <span class="en-inline">Clean and unclean animals — what enters the body shapes the community's distinctiveness before God and in the world.</span>
+        <span class="ko-inline">정결한 동물과 부정한 동물. 몸에 들어오는 것이 하나님 앞에서, 그리고 세상 속에서 공동체의 독특성을 형성합니다.</span>
+      </p>
+    </div>
+    <div class="pg-card">
+      <span class="pg-icon">🩺</span>
+      <span class="pg-cat"><span class="en-inline">Ch 12 · Birth</span><span class="ko-inline">12장 · 출산</span></span>
+      <div class="pg-title"><span class="en-inline">Childbirth Purification</span><span class="ko-inline">출산 정결 규례</span></div>
+      <span class="pg-title-ko"><span class="en-inline">출산 정결 규례</span><span class="ko-inline">Purification after Birth</span></span>
+      <p class="pg-desc">
+        <span class="en-inline">After birth, a purification period marks the transition of new life entering the covenant community.</span>
+        <span class="ko-inline">출산 후 정결 기간은 새 생명이 언약 공동체에 들어오는 전환을 표시합니다.</span>
+      </p>
+    </div>
+    <div class="pg-card">
+      <span class="pg-icon">🔬</span>
+      <span class="pg-cat"><span class="en-inline">Ch 13–14 · Skin</span><span class="ko-inline">13–14장 · 피부</span></span>
+      <div class="pg-title"><span class="en-inline">Skin Disease & Mold</span><span class="ko-inline">피부병과 곰팡이</span></div>
+      <span class="pg-title-ko"><span class="en-inline">피부병과 곰팡이</span><span class="ko-inline">Skin Disease &amp; Mold</span></span>
+      <p class="pg-desc">
+        <span class="en-inline">Priestly diagnosis and restoration — the community's boundaries maintained through careful discernment and healing ritual.</span>
+        <span class="ko-inline">제사장의 진단과 회복. 세심한 분별과 치유 의식을 통해 공동체의 경계가 유지됩니다.</span>
+      </p>
+    </div>
+    <div class="pg-card">
+      <span class="pg-icon">💧</span>
+      <span class="pg-cat"><span class="en-inline">Ch 15 · Bodily</span><span class="ko-inline">15장 · 몸의 유출</span></span>
+      <div class="pg-title"><span class="en-inline">Bodily Discharges</span><span class="ko-inline">몸의 유출물 규례</span></div>
+      <span class="pg-title-ko"><span class="en-inline">몸의 유출물 규례</span><span class="ko-inline">Laws on Bodily Discharges</span></span>
+      <p class="pg-desc">
+        <span class="en-inline">The body's natural cycles ordered before God — ordinary bodily experience integrated into the sacred/ordinary framework.</span>
+        <span class="ko-inline">하나님 앞에서 정돈된 몸의 자연적 순환. 일상적인 신체 경험이 거룩함/일상의 틀에 통합됩니다.</span>
+      </p>
+    </div>
+    <div class="pg-card" style="grid-column:span 2">
+      <span class="pg-icon">🙌</span>
+      <span class="pg-cat"><span class="en-inline">Theological Core · 신학적 핵심</span><span class="ko-inline">신학적 핵심 · Theological Core</span></span>
+      <div class="pg-title"><span class="en-inline">Bodies Are Not Incidental to Holiness</span><span class="ko-inline">몸은 거룩함에 부차적이지 않습니다</span></div>
+      <span class="pg-title-ko"><span class="en-inline">몸이 거룩함의 주요 장소입니다</span><span class="ko-inline">The body is the primary site of holiness</span></span>
+      <p class="pg-desc">
+        <span class="en-inline">The purity laws do not divide body from spirit — they integrate them. Holiness is not merely a matter of the heart; it is registered in bodies, in meals, in physical space. The priestly imagination insists that the material world is the arena of God's claim.</span>
+        <span class="ko-inline">정결 규례는 몸과 영을 분리하지 않고 통합합니다. 거룩함은 단지 마음의 문제가 아니라 몸에, 식사에, 물리적 공간에 등록됩니다. 제사장적 상상력은 물질 세계가 하나님의 주장의 무대임을 주장합니다.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- SECTION 9 — JUBILEE                                   -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="s-jubilee">
+  <div class="sec-eyebrow reveal" style="color:var(--outward-color)">
+    <span class="en-inline">⑨ Chapter 25 · Jubilee — 50-Year Cycle · 회년</span>
+    <span class="ko-inline">⑨ 25장 · 희년 — 50년 주기 · Jubilee</span>
+  </div>
+  <h2 class="sec-title reveal">
+    <span class="en-inline">The Jubilee — <em style="color:var(--gold)">Justice Built into Time</em></span>
+    <span class="ko-inline">희년 — <em style="color:var(--gold)">시간 속에 새겨진 정의</em></span>
+  </h2>
+
+  <div class="jubilee-layout reveal">
+    <div class="jubilee-counter">
+      <div class="year-ring">
+        <svg class="yr-svg" viewBox="0 0 260 260" id="jubilee-svg">
+          <!-- rings injected by JS -->
+        </svg>
+        <div class="yr-center">
+          <span class="yr-num">50</span>
+          <span class="yr-label"><span class="en-inline">Year Cycle</span><span class="ko-inline">년 주기</span></span>
+          <span class="yr-label-ko"><span class="en-inline">희년 주기</span><span class="ko-inline">Jubilee Cycle</span></span>
+        </div>
+      </div>
+      <p class="sec-desc" style="text-align:center;font-size:0.82rem;">
+        <span class="en-inline">Every 7 years: Sabbath year (land rest, debt release). Every 7×7+1 = Year 50: Jubilee — land returns to original families, slaves go free, debts cancelled. Holiness restructures economics.</span>
+        <span class="ko-inline">매 7년: 안식년(땅의 안식, 빚 탕감). 매 7×7+1=50년: 희년 — 땅이 원래 가족에게 돌아가고, 종이 해방되고, 빚이 탕감됩니다. 거룩함이 경제를 재구조화합니다.</span>
+      </p>
+    </div>
+
+    <div>
+      <div class="jubilee-pillars" id="jubilee-pillars">
+        <!-- injected by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- SECTION 10 — LOVE THE STRANGER                        -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="s-stranger">
+  <div class="sec-eyebrow reveal" style="color:var(--outward-color)">
+    <span class="en-inline">⑪ Leviticus 19:33–34 · Love the Stranger · 나그네를 사랑하라</span>
+    <span class="ko-inline">⑪ 레위기 19:33–34 · 나그네를 사랑하라 · Love the Stranger</span>
+  </div>
+  <h2 class="sec-title reveal">
+    <span class="en-inline">"Love the Stranger as Yourself" — <em style="color:var(--gold)">Holiness is Social</em></span>
+    <span class="ko-inline">"나그네를 너희 자신처럼 사랑하라" — <em style="color:var(--gold)">거룩함은 사회적이다</em></span>
+  </h2>
+
+  <div class="stranger-layout reveal">
+    <div class="stranger-verse-block">
+      <p class="sv-text">
+        <span class="en-inline">"When a stranger sojourns with you in your land, you shall not do him wrong. You shall treat the stranger who sojourns with you as the native among you, and you shall love him as yourself, for you were strangers in the land of Egypt."</span>
+        <span class="ko-inline">"거류민이 너희의 땅에 거류하여 함께 있거든 너희는 그를 학대하지 말고 그와 함께 있는 거류민을 너희 중에서 낳은 자 같이 여기며 자신 같이 사랑하라 너희도 애굽 땅에서 거류민이 되었었느니라."</span>
+      </p>
+      <p class="sv-text-ko">
+        <span class="en-inline">거류민이 너희의 땅에 거류하여...</span>
+        <span class="ko-inline">When a stranger sojourns with you...</span>
+      </p>
+      <span class="sv-ref">Leviticus 19:33–34 · 레위기 19:33–34</span>
+    </div>
+
+    <div class="stranger-sidebar">
+      <div class="ss-item">
+        <span class="ss-icon">🧠</span>
+        <div class="ss-title"><span class="en-inline">Memory as Ethics</span><span class="ko-inline">기억이 윤리가 된다</span></div>
+        <span class="ss-title-ko"><span class="en-inline">기억이 윤리가 된다</span><span class="ko-inline">Memory as Ethics</span></span>
+        <p class="ss-desc">
+          <span class="en-inline">"You were strangers in Egypt" — Israel's experience of exile is the warrant for their treatment of the stranger now. Memory funds ethics.</span>
+          <span class="ko-inline">"너희도 애굽에서 거류민이었다" — 이스라엘의 유배 경험이 지금 나그네를 대하는 방식의 근거가 됩니다. 기억이 윤리를 뒷받침합니다.</span>
+        </p>
+      </div>
+      <div class="ss-item">
+        <span class="ss-icon">⚖️</span>
+        <div class="ss-title"><span class="en-inline">Holiness = Justice</span><span class="ko-inline">거룩함 = 정의</span></div>
+        <span class="ss-title-ko"><span class="en-inline">거룩함 = 정의</span><span class="ko-inline">Holiness = Justice</span></span>
+        <p class="ss-desc">
+          <span class="en-inline">Lev 19 places the love of neighbor (v.18) and love of stranger (v.34) in the same chapter as "I am the LORD." Holiness is not merely ritual — it is relational justice.</span>
+          <span class="ko-inline">레위기 19장은 이웃 사랑(18절)과 나그네 사랑(34절)을 "나는 여호와이니라"와 같은 장에 배치합니다. 거룩함은 단순히 의식이 아니라 관계적 정의입니다.</span>
+        </p>
+      </div>
+      <div class="ss-item">
+        <span class="ss-icon">🌍</span>
+        <div class="ss-title"><span class="en-inline">Outward Movement Embodied</span><span class="ko-inline">밖으로의 이동의 구현</span></div>
+        <span class="ss-title-ko"><span class="en-inline">밖으로의 이동의 구현</span><span class="ko-inline">Outward Movement Embodied</span></span>
+        <p class="ss-desc">
+          <span class="en-inline">The stranger command is the clearest embodiment of "outward movement" — holiness moving from the sanctuary into social relationships.</span>
+          <span class="ko-inline">나그네 명령은 "밖으로의 이동"의 가장 명확한 구현입니다 — 거룩함이 성소에서 사회적 관계 속으로 움직입니다.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- SECTION 11 — THE MANDATE (⑫ + WHERE/WHO/WHAT)         -->
+<!-- ══════════════════════════════════════════════════════ -->
+<section class="section" id="s-mandate">
+  <div class="sec-eyebrow reveal" style="color:var(--gold);text-align:center">
+    <span class="en-inline">⑥⑫ Chapters 17–27 · The Governing Mandate · 성결 법전의 핵심</span>
+    <span class="ko-inline">⑥⑫ 17–27장 · 성결 법전의 핵심 · The Governing Mandate</span>
+  </div>
+
+  <div class="mandate-quote reveal">
+    <p class="mq-text">
+      <span class="en-inline">"You shall be holy,<br>for I the LORD your God am holy."</span>
+      <span class="ko-inline">"나 여호와 너희 하나님이 거룩하니<br>너희도 거룩할지어다."</span>
+    </p>
+    <p class="mq-text-ko">
+      <span class="en-inline">나 여호와 너희 하나님이 거룩하니 너희도 거룩할지어다</span>
+      <span class="ko-inline">You shall be holy, for I the LORD your God am holy</span>
+    </p>
+    <span class="mq-ref">Leviticus 11:44; 19:2 · 레위기 11:44; 19:2</span>
+  </div>
+
+  <div class="sec-eyebrow reveal" style="text-align:center;color:var(--gold);margin-bottom:20px;">
+    <span class="en-inline">Formation Path — WHERE · WHO · WHAT</span>
+    <span class="ko-inline">형성 경로 — 어디에 · 누구로 · 무엇을</span>
+  </div>
+
+  <div class="mandate-where-who-what reveal">
+    <div class="mww-item">
+      <span class="mww-key">W</span>
+      <div class="mww-q"><span class="en-inline">WHERE are you?</span><span class="ko-inline">당신은 어디에?</span></div>
+      <span class="mww-q-ko"><span class="en-inline">당신의 현재 위치</span><span class="ko-inline">Your present location</span></span>
+      <p class="mww-a">
+        <span class="en-inline">Leviticus begins with location: the Tent of Meeting. God speaks from a place. Identify where you are — approaching, withdrawing, or frozen in the in-between.</span>
+        <span class="ko-inline">레위기는 장소에서 시작됩니다: 회막. 하나님은 특정 장소에서 말씀하십니다. 당신이 어디에 있는지 확인하십시오 — 나아가고 있는지, 물러나고 있는지, 경계에 갇혀 있는지.</span>
+      </p>
+    </div>
+    <div class="mww-item">
+      <span class="mww-key">W</span>
+      <div class="mww-q"><span class="en-inline">WHO are you becoming?</span><span class="ko-inline">당신은 누구로?</span></div>
+      <span class="mww-q-ko"><span class="en-inline">정체성 형성</span><span class="ko-inline">Identity formation</span></span>
+      <p class="mww-a">
+        <span class="en-inline">"Be holy as I am holy" — identity is not possession but participation. You become who you are through located action, not through static essence.</span>
+        <span class="ko-inline">"내가 거룩하니 너희도 거룩하라" — 정체성은 소유가 아니라 참여입니다. 당신은 고정된 본질이 아니라 위치된 행동을 통해 누가 되어가는지를 형성합니다.</span>
+      </p>
+    </div>
+    <div class="mww-item">
+      <span class="mww-key">W</span>
+      <div class="mww-q"><span class="en-inline">WHAT are you called to do?</span><span class="ko-inline">무엇을 하도록?</span></div>
+      <span class="mww-q-ko"><span class="en-inline">소명과 행동</span><span class="ko-inline">Vocation and action</span></span>
+      <p class="mww-a">
+        <span class="en-inline">Jubilee answers: release the captive, restore the land, love the stranger. Holiness is structural justice. Who in your community is frozen without movement?</span>
+        <span class="ko-inline">희년이 답합니다: 포로를 해방하고, 땅을 회복하고, 나그네를 사랑하십시오. 거룩함은 구조적 정의입니다. 당신의 공동체에서 움직임 없이 갇혀 있는 사람은 누구입니까?</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+// ════════════════════════════════════════
+// DATA
+// ════════════════════════════════════════
+const OFFERINGS = [
+  {
+    num:'01', icon:'🔥', ref:'Lev 1',
+    nameEn:'Burnt Offering', nameKo:'번제 (עֹלָה)',
+    hebrewEn:'עֹלָה', hebrewKo:'עֹלָה',
+    titleEn:'Burnt Offering', titleKo:'번제',
+    subtitleEn:'Total Dedication', subtitleKo:'전적 헌신',
+    descEn:'The entire animal is consumed by fire — nothing held back. Total surrender and dedication to God. The offering "goes up" (olah = ascent) entirely to God. No portion returns to the worshiper.',
+    descKo:'전체 동물이 불에 소모됩니다 — 아무것도 남기지 않습니다. 하나님께 완전히 드리는 전적 헌신. 제물이 통째로 하나님께 "올라갑니다"(올라 = 상승). 예배자에게 돌아오는 몫이 없습니다.',
+    formEn:'Question: What am I holding back from God that this offering invites me to surrender?',
+    formKo:'질문: 이 제사가 하나님께 내어드리도록 초대하는, 내가 붙들고 있는 것은 무엇인가?'
+  },
+  {
+    num:'02', icon:'🌾', ref:'Lev 2',
+    nameEn:'Grain Offering', nameKo:'소제 (מִנְחָה)',
+    hebrewEn:'מִנְחָה', hebrewKo:'מִנְחָה',
+    titleEn:'Grain Offering', titleKo:'소제',
+    subtitleEn:'Daily Labor Consecrated', subtitleKo:'일상의 노동 봉헌',
+    descEn:'Grain, oil, salt, and incense — the fruit of human labor brought as gift. No blood is shed. This is the consecration of ordinary work, of the daily bread of human effort, returned to God as worship.',
+    descKo:'곡물, 기름, 소금, 향 — 인간 노동의 결실을 예물로 드림. 피가 흘리지 않습니다. 이것은 일상의 노동, 인간 수고의 일용한 양식을 하나님께 예배로 돌려드리는 봉헌입니다.',
+    formEn:'Question: How might my ordinary work this week become an act of worship — offered rather than merely performed?',
+    formKo:'질문: 이번 주 나의 일상적인 일이 단순히 수행하는 것이 아니라 드리는 예배 행위가 될 수 있는 방법은?'
+  },
+  {
+    num:'03', icon:'🕊️', ref:'Lev 3',
+    nameEn:'Peace Offering', nameKo:'화목제 (שֶׁלֶם)',
+    hebrewEn:'שֶׁלֶם', hebrewKo:'שֶׁלֶם',
+    titleEn:'Peace Offering', titleKo:'화목제',
+    subtitleEn:'Communion Feast', subtitleKo:'교제의 잔치',
+    descEn:'Uniquely, the peace offering involves a shared meal — portions given to God (fat), to the priest, and to the worshiper and their household. It is a communion feast: restored relationship expressed in eating together at the table of God.',
+    descKo:'독특하게도, 화목제는 공유된 식사를 포함합니다 — 부분은 하나님께(기름), 제사장에게, 예배자와 가족에게 주어집니다. 이것은 교제의 잔치입니다: 하나님의 식탁에서 함께 먹는 것으로 표현된 회복된 관계.',
+    formEn:'Question: Who am I invited to sit at table with — sharing food as a practice of restored communion?',
+    formKo:'질문: 회복된 교제의 실천으로 음식을 나누며 함께 식탁에 앉도록 초대받은 사람은 누구인가?'
+  },
+  {
+    num:'04', icon:'🩸', ref:'Lev 4–5',
+    nameEn:'Sin Offering', nameKo:'속죄제 (חַטָּאת)',
+    hebrewEn:'חַטָּאת', hebrewKo:'חַטָּאת',
+    titleEn:'Sin Offering', titleKo:'속죄제',
+    subtitleEn:'Cleansing for Unintentional Sin', subtitleKo:'비의도적 죄를 위한 정결',
+    descEn:'Blood is the price of purity. The sin offering addresses unintentional sins — acts of commission and omission that breach the covenant without full awareness. The life of the animal is given that the community may draw near again.',
+    descKo:'피가 정결의 대가입니다. 속죄제는 비의도적 죄를 다룹니다 — 완전한 인식 없이 언약을 위반하는 행위와 태만. 동물의 생명이 주어져 공동체가 다시 하나님께 나아갈 수 있게 됩니다.',
+    formEn:'Question: What unintentional harm might I have caused recently that needs acknowledgment and cleansing?',
+    formKo:'질문: 최근에 비의도적으로 해를 끼쳤을 수 있는 일이 있는가? 인정과 정결이 필요한가?'
+  },
+  {
+    num:'05', icon:'⚖️', ref:'Lev 5–6',
+    nameEn:'Guilt Offering', nameKo:'속건제 (אָשָׁם)',
+    hebrewEn:'אָשָׁם', hebrewKo:'אָשָׁם',
+    titleEn:'Guilt Offering', titleKo:'속건제',
+    subtitleEn:'Restitution & Repair', subtitleKo:'배상과 회복',
+    descEn:'The guilt offering adds a dimension the sin offering does not: restitution. Not only is the offense atoned for — the wrong must be made right (120% of value). Holiness requires not just forgiveness but repair. Harm must be undone.',
+    descKo:'속건제는 속죄제에 없는 차원을 추가합니다: 배상. 죄가 속죄될 뿐만 아니라 — 잘못이 바로잡혀야 합니다(가치의 120%). 거룩함은 용서뿐 아니라 회복을 요구합니다. 해가 원상복구되어야 합니다.',
+    formEn:'Question: Is there a wrong I have done that requires not just apology but concrete repair? What would 120% restoration look like?',
+    formKo:'질문: 단순한 사과가 아니라 구체적인 회복이 필요한 잘못이 있는가? 120% 배상은 어떤 모습일까?'
+  }
+];
+
+const HOLINESS_LEVELS = [
+  {
+    icon:'🌍', color:'#2A6080', indent:0,
+    nameEn:'Nations (Etic)', nameKo:'이방 나라',
+    descEn:'The farthest threshold — where holiness radiates outward as witness, justice, and blessing to all peoples. Israel\'s holiness is missional: "a kingdom of priests" for the nations (Exod 19:6).',
+    descKo:'가장 먼 경계. 거룩함이 증인, 정의, 모든 민족을 향한 복으로 밖으로 퍼져나갑니다. 이스라엘의 거룩함은 선교적입니다: 민족들을 위한 "제사장 나라"(출 19:6).'
+  },
+  {
+    icon:'🏕️', color:'#4A7560', indent:1,
+    nameEn:'Camp of Israel', nameKo:'이스라엘 진영',
+    descEn:'Daily community life — holiness ordered in social relationships, meals, commerce, conflict. The camp is where the outward movement lands: sanctuary holiness embodied in ordinary community.',
+    descKo:'일상의 공동체 생활. 사회적 관계, 식사, 상거래, 갈등 속에서 정돈된 거룩함. 진영은 밖으로의 이동이 착지하는 곳입니다: 일상 공동체 속에 구현된 성소의 거룩함.'
+  },
+  {
+    icon:'⛺', color:'#8B6040', indent:2,
+    nameEn:'Tabernacle Courtyard', nameKo:'성막 뜰',
+    descEn:'The altar stands here. Sacrifice is made; the approach to God begins in blood and fire. The first threshold — crossing from camp into the sacred precinct.',
+    descKo:'제단이 있는 곳. 제사가 드려지고, 피와 불 속에서 하나님께 나아가는 여정이 시작됩니다. 첫 번째 문지방 — 진영에서 거룩한 경내로의 횡단.'
+  },
+  {
+    icon:'🕯️', color:'#B08040', indent:3,
+    nameEn:'Holy Place', nameKo:'성소',
+    descEn:'Lampstand, bread of the presence, altar of incense. Continuous, ordered worship. Only the priests may enter. The space of mediation — between God and the community.',
+    descKo:'등잔대, 진설병, 분향단. 지속적이고 정돈된 예배. 오직 제사장만 들어갈 수 있습니다. 중재의 공간 — 하나님과 공동체 사이.'
+  },
+  {
+    icon:'✨', color:'#C9A96E', indent:4,
+    nameEn:'Holy of Holies', nameKo:'지성소 (Holy of Holies)',
+    descEn:'The Ark of the Covenant beneath the cherubim wings. God\'s dwelling. One priest, once a year, on Yom Kippur alone — carrying the blood of atonement for the whole community.',
+    descKo:'그룹의 날개 아래 법궤. 하나님의 거처. 오직 대제사장 한 명만이, 연 1회, 오직 욤 키푸르에만 — 온 공동체를 위한 속죄의 피를 가지고 들어갑니다.'
+  },
+  {
+    icon:'🌟', color:'#E8D5A3', indent:4,
+    nameEn:'Shekinah — God\'s Presence', nameKo:'쉐키나 — 하나님의 임재',
+    descEn:'The goal of the entire structure: God dwelling with his people. Not merely God visiting — but God inhabiting, abiding, remaining. The trajectory of all of Scripture from Eden to Revelation 21–22.',
+    descKo:'전체 구조의 목표: 하나님이 그의 백성과 함께 거하심. 단순히 방문하는 것이 아니라 — 거주하고, 머물고, 계속 계심. 에덴에서 요한계시록 21–22장까지 모든 성경의 궤적.'
+  }
+];
+
+const FEASTS = [
+  {
+    num:1, icon:'🌑', ref:'Lev 23:3',
+    nameEn:'Sabbath', nameKo:'안식일 (Shabbat)',
+    descEn:'Weekly rest — the rhythm of creation embedded in covenant life. Every week rehearses the creation narrative: God rested; so must Israel.',
+    descKo:'매주의 안식 — 창조의 리듬이 언약 생활에 새겨집니다. 매주 창조 이야기를 되살립니다: 하나님이 쉬셨습니다; 이스라엘도 그래야 합니다.',
+    color:'#6A5A3A'
+  },
+  {
+    num:2, icon:'🐑', ref:'Lev 23:5',
+    nameEn:'Passover (Pesach)', nameKo:'유월절 (Pesach)',
+    descEn:'The foundational festival — commemorating the Exodus from Egypt. Blood on the doorposts; death passing over. The entire year begins here.',
+    descKo:'기초적인 절기 — 애굽에서의 출애굽을 기념합니다. 문설주의 피; 죽음이 지나감. 한 해 전체가 여기서 시작됩니다.',
+    color:'#8B4040'
+  },
+  {
+    num:3, icon:'🫓', ref:'Lev 23:6',
+    nameEn:'Unleavened Bread (Matzot)', nameKo:'무교절 (무교병)',
+    descEn:'Seven days of unleavened bread following Passover — the haste of departure, the removal of leaven as moral and physical purging.',
+    descKo:'유월절 다음 7일간의 무교병 — 출발의 서두름, 도덕적, 신체적 정화로서의 누룩 제거.',
+    color:'#7A6030'
+  },
+  {
+    num:4, icon:'🌾', ref:'Lev 23:10',
+    nameEn:'Firstfruits (Bikkurim)', nameKo:'초실절 (초실절)',
+    descEn:'The first sheaf of barley offered to God — acknowledging that the harvest belongs to God first before it belongs to Israel.',
+    descKo:'하나님께 드리는 첫 보리 단 — 추수가 이스라엘에게 속하기 전에 먼저 하나님께 속한다는 것을 인정합니다.',
+    color:'#5A7030'
+  },
+  {
+    num:5, icon:'📜', ref:'Lev 23:15',
+    nameEn:'Weeks / Pentecost (Shavuot)', nameKo:'칠칠절 (오순절)',
+    descEn:'50 days after Firstfruits — celebrating the wheat harvest and, in rabbinic tradition, the giving of the Torah at Sinai. The firstfruits of the Spirit (Acts 2).',
+    descKo:'초실절 후 50일 — 밀 추수를 축하하고, 랍비 전통에서는 시내산에서의 토라 수여를 기념합니다. 성령의 초실절(행 2).',
+    color:'#4A6050'
+  },
+  {
+    num:6, icon:'🎺', ref:'Lev 23:24',
+    nameEn:'Trumpets (Rosh Hashanah)', nameKo:'나팔절 (로쉬 하샤나)',
+    descEn:'The blast of the shofar announces the new year — awakening, alertness, the call to return. Ten days until Yom Kippur.',
+    descKo:'쇼파르 소리가 새해를 알립니다 — 각성, 주의, 돌아오라는 부름. 욤 키푸르까지 열흘.',
+    color:'#5A4070'
+  },
+  {
+    num:7, icon:'🛖', ref:'Lev 23:34',
+    nameEn:'Tabernacles (Sukkot)', nameKo:'초막절 (수콧)',
+    descEn:'Seven days in temporary shelters — remembering the wilderness journey, anticipating the final dwelling of God with his people (Rev 21). The year ends with God\'s presence.',
+    descKo:'임시 거처에서의 7일 — 광야 여정을 기억하고, 하나님이 그의 백성과 함께 거하실 최후의 날을 기대합니다(계 21). 한 해가 하나님의 임재로 마감됩니다.',
+    color:'#4A5070'
+  }
+];
+
+const JUBILEE_PILLARS = [
+  {
+    icon:'🏘️',
+    titleEn:'Land Returns', titleKo:'땅의 반환',
+    descEn:'All land sold since the last Jubilee returns to the original family. The land belongs to God; Israel are tenants, not permanent owners (Lev 25:23).',
+    descKo:'마지막 희년 이후 판매된 모든 토지가 원래 가족에게 돌아갑니다. 땅은 하나님의 것; 이스라엘은 영구 소유자가 아닌 세입자입니다(레 25:23).'
+  },
+  {
+    icon:'🔓',
+    titleEn:'Slaves Go Free', titleKo:'종의 해방',
+    descEn:'All Israelite slaves are released. Debt-bondage cannot be permanent — no Israelite can be enslaved to another Israelite forever.',
+    descKo:'모든 이스라엘 종들이 해방됩니다. 빚으로 인한 예속은 영구적일 수 없습니다 — 이스라엘인은 영원히 다른 이스라엘인의 종이 될 수 없습니다.'
+  },
+  {
+    icon:'📋',
+    titleEn:'Debts Cancelled', titleKo:'부채 탕감',
+    descEn:'Economic obligations accumulated over 50 years are released. The Jubilee prevents permanent economic stratification — wealth cannot concentrate indefinitely.',
+    descKo:'50년에 걸쳐 누적된 경제적 의무가 탕감됩니다. 희년은 영구적인 경제적 계층화를 방지합니다 — 부는 무한정 집중될 수 없습니다.'
+  },
+  {
+    icon:'🎺',
+    titleEn:'Announced by the Shofar', titleKo:'쇼파르로 선포',
+    descEn:'On the 10th day of the 7th month (Yom Kippur) in the 50th year — the trumpet blast announces liberation. Freedom proclaimed from the most sacred day of the year.',
+    descKo:'50년째 7월 10일(욤 키푸르)에 — 나팔 소리가 해방을 선포합니다. 한 해의 가장 거룩한 날에 자유가 선포됩니다.'
+  }
+];
+
+// ════════════════════════════════════════
+// RENDER OFFERINGS
+// ════════════════════════════════════════
+let activeOffering = 0;
+function renderOfferings() {
+  const tabs = document.getElementById('offerings-tabs');
+  const detail = document.getElementById('offering-detail');
+  tabs.innerHTML = OFFERINGS.map((o, i) => `
+    <div class="offering-tab ${i===0?'active':''}" onclick="selectOffering(${i})">
+      <span class="ot-num">${o.num}</span>
+      <span class="ot-icon">${o.icon}</span>
+      <div class="ot-text">
+        <div class="ot-name"><span class="en-inline">${o.nameEn}</span><span class="ko-inline">${o.nameKo}</span></div>
+        <span class="ot-name-ko"><span class="en-inline">${o.nameKo}</span><span class="ko-inline">${o.nameEn}</span></span>
+      </div>
+      <span class="ot-ref">${o.ref}</span>
+    </div>
+  `).join('');
+  showOffering(0);
+}
+function selectOffering(i) {
+  activeOffering = i;
+  document.querySelectorAll('.offering-tab').forEach((t,j) => t.classList.toggle('active', j===i));
+  showOffering(i);
+}
+function showOffering(i) {
+  const o = OFFERINGS[i];
+  document.getElementById('offering-detail').innerHTML = `
+    <span class="od-hebrew"><span class="en-inline">${o.hebrewEn}</span><span class="ko-inline">${o.hebrewKo}</span></span>
+    <div class="od-title"><span class="en-inline">${o.titleEn}</span><span class="ko-inline">${o.titleKo}</span></div>
+    <span class="od-title-ko"><span class="en-inline">${o.subtitleEn}</span><span class="ko-inline">${o.subtitleKo}</span></span>
+    <p class="od-desc"><span class="en-inline">${o.descEn}</span><span class="ko-inline">${o.descKo}</span></p>
+    <div class="od-formation">
+      <span class="od-formation-label"><span class="en-inline">Formation Practice</span><span class="ko-inline">형성 실천</span></span>
+      <p class="od-formation-text"><span class="en-inline">${o.formEn}</span><span class="ko-inline">${o.formKo}</span></p>
+    </div>
+  `;
+  // re-apply lang
+  applyLang();
+}
+
+// ════════════════════════════════════════
+// RENDER HOLINESS LEVELS
+// ════════════════════════════════════════
+function renderHoliness() {
+  const track = document.getElementById('holiness-track');
+  track.innerHTML = HOLINESS_LEVELS.map((h, i) => `
+    <div class="h-row" onclick="toggleHoliness(${i})">
+      <div class="h-indent" style="width:${h.indent*20}px"></div>
+      <div class="h-row-inner">
+        <div class="h-bar" style="background:${h.color};height:${40+h.indent*8}px"></div>
+        <div class="h-icon">${h.icon}</div>
+        <div class="h-content">
+          <div class="h-name"><span class="en-inline">${h.nameEn}</span><span class="ko-inline">${h.nameKo}</span></div>
+          <span class="h-name-ko"><span class="en-inline">${h.nameKo}</span><span class="ko-inline">${h.nameEn}</span></span>
+          <div class="h-expand"><span class="en-inline">${h.descEn}</span><span class="ko-inline">${h.descKo}</span></div>
+        </div>
+        <span class="h-chevron">▶</span>
+      </div>
+    </div>
+  `).join('');
+}
+function toggleHoliness(i) {
+  const rows = document.querySelectorAll('.h-row');
+  rows.forEach((r,j) => r.classList.toggle('active', j===i && !r.classList.contains('active')));
+  applyLang();
+}
+
+// ════════════════════════════════════════
+// RENDER FEAST WHEEL (SVG)
+// ════════════════════════════════════════
+function renderFeastWheel() {
+  const svg = document.getElementById('feast-svg');
+  const cx=150, cy=150, r=110, inner=70;
+  const n = FEASTS.length;
+  let paths = '';
+  FEASTS.forEach((f,i) => {
+    const a0 = (i/n)*Math.PI*2 - Math.PI/2;
+    const a1 = ((i+1)/n)*Math.PI*2 - Math.PI/2;
+    const x0=cx+r*Math.cos(a0), y0=cy+r*Math.sin(a0);
+    const x1=cx+r*Math.cos(a1), y1=cy+r*Math.sin(a1);
+    const xi0=cx+inner*Math.cos(a0), yi0=cy+inner*Math.sin(a0);
+    const xi1=cx+inner*Math.cos(a1), yi1=cy+inner*Math.sin(a1);
+    const mid=(a0+a1)/2;
+    const tx=cx+(r+inner)/2*Math.cos(mid), ty=cy+(r+inner)/2*Math.sin(mid);
+    paths += `<path d="M${xi0},${yi0} L${x0},${y0} A${r},${r},0,0,1,${x1},${y1} L${xi1},${yi1} A${inner},${inner},0,0,0,${xi0},${yi0}" fill="${f.color}" opacity="0.6" stroke="rgba(14,10,4,0.8)" stroke-width="2" class="feast-sector" data-feast="${i}" style="cursor:pointer;transition:opacity 0.3s"/>`;
+    paths += `<text x="${tx}" y="${ty}" text-anchor="middle" dominant-baseline="middle" font-size="18" style="pointer-events:none">${f.icon}</text>`;
+    paths += `<text x="${tx}" y="${ty+16}" text-anchor="middle" dominant-baseline="middle" font-size="7" fill="rgba(242,232,208,0.7)" font-family="Cinzel,serif" letter-spacing="0.5" style="pointer-events:none">${f.num}</text>`;
+  });
+  // center circle
+  paths += `<circle cx="${cx}" cy="${cy}" r="${inner-4}" fill="rgba(14,10,4,0.9)" stroke="rgba(201,169,110,0.2)" stroke-width="1"/>`;
+  svg.innerHTML = paths;
+  svg.querySelectorAll('.feast-sector').forEach(s => {
+    s.addEventListener('mouseenter', () => s.setAttribute('opacity','1'));
+    s.addEventListener('mouseleave', () => {
+      if (!s.classList.contains('active-sector')) s.setAttribute('opacity','0.6');
+    });
+    s.addEventListener('click', () => {
+      selectFeast(parseInt(s.dataset.feast));
+    });
+  });
+}
+
+// Feast list
+function renderFeastList() {
+  const list = document.getElementById('feast-list');
+  list.innerHTML = FEASTS.map((f,i) => `
+    <div>
+      <div class="feast-item ${i===0?'active':''}" onclick="selectFeast(${i})">
+        <div class="fi-dot">${f.num}</div>
+        <div class="fi-text">
+          <div class="fi-name"><span class="en-inline">${f.nameEn}</span><span class="ko-inline">${f.nameKo}</span></div>
+          <span class="fi-name-ko"><span class="en-inline">${f.nameKo}</span><span class="ko-inline">${f.nameEn}</span></span>
+        </div>
+        <span class="fi-ref">${f.ref}</span>
+      </div>
+      <div class="fi-expand"><span class="en-inline">${f.descEn}</span><span class="ko-inline">${f.descKo}</span></div>
+    </div>
+  `).join('');
+}
+let activeFeast = 0;
+function selectFeast(i) {
+  activeFeast = i;
+  document.querySelectorAll('.feast-item').forEach((el,j) => el.classList.toggle('active', j===i));
+  // highlight SVG sector
+  document.querySelectorAll('.feast-sector').forEach((s,j) => {
+    s.setAttribute('opacity', j===i ? '1' : '0.6');
+    s.classList.toggle('active-sector', j===i);
+  });
+  applyLang();
+}
+
+// ════════════════════════════════════════
+// RENDER JUBILEE SVG
+// ════════════════════════════════════════
+function renderJubilee() {
+  const svg = document.getElementById('jubilee-svg');
+  const cx=130,cy=130,rings=5;
+  let paths='';
+  for(let i=rings;i>0;i--) {
+    const r=i*22;
+    const alpha = i===1?0.5:0.15;
+    paths+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(42,96,128,${alpha})" stroke-width="${i===1?2:1}" stroke-dasharray="${i===1?'none':'4,4'}"/>`;
+  }
+  // sabbath year marks
+  for(let y=7;y<50;y+=7) {
+    const a=(y/50)*Math.PI*2-Math.PI/2;
+    const x1=cx+95*Math.cos(a), y1=cy+95*Math.sin(a);
+    const x2=cx+108*Math.cos(a), y2=cy+108*Math.sin(a);
+    paths+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="rgba(42,96,128,0.5)" stroke-width="2"/>`;
+    paths+=`<text x="${cx+118*Math.cos(a)}" y="${cy+118*Math.sin(a)}" text-anchor="middle" dominant-baseline="middle" font-size="8" fill="rgba(42,96,128,0.7)" font-family="Cinzel,serif">yr${y}</text>`;
+  }
+  svg.innerHTML=paths;
+  // Animate
+  let frame=0;
+  setInterval(()=>{
+    frame++;
+    svg.querySelectorAll('circle').forEach((c,i)=>{
+      c.setAttribute('opacity', 0.5+0.5*Math.sin(frame*0.05+i*0.8));
+    });
+  },50);
+}
+
+// ════════════════════════════════════════
+// RENDER JUBILEE PILLARS
+// ════════════════════════════════════════
+function renderJubileePillars() {
+  const el = document.getElementById('jubilee-pillars');
+  el.innerHTML = JUBILEE_PILLARS.map(p => `
+    <div class="jp-item">
+      <span class="jp-icon">${p.icon}</span>
+      <div class="jp-text">
+        <div class="jp-title"><span class="en-inline">${p.titleEn}</span><span class="ko-inline">${p.titleKo}</span></div>
+        <span class="jp-title-ko"><span class="en-inline">${p.titleKo}</span><span class="ko-inline">${p.titleEn}</span></span>
+        <p class="jp-desc"><span class="en-inline">${p.descEn}</span><span class="ko-inline">${p.descKo}</span></p>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ════════════════════════════════════════
+// "I AM THE LORD" COUNTER ANIMATION
+// ════════════════════════════════════════
+function renderIamDots() {
+  const dotsEl = document.getElementById('iam-dots');
+  dotsEl.innerHTML = Array.from({length:16},(_,i)=>`<div class="iam-dot" id="iam-dot-${i}">${i+1}</div>`).join('');
+}
+function animateIam() {
+  const countEl = document.getElementById('iam-count');
+  let count=0;
+  const interval = setInterval(()=>{
+    count++;
+    countEl.textContent = count;
+    const dot = document.getElementById(`iam-dot-${count-1}`);
+    if(dot) dot.classList.add('lit');
+    if(count>=16) clearInterval(interval);
+  },150);
+}
+// Trigger when section enters view
+const iamObserver = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      setTimeout(animateIam,500);
+      iamObserver.disconnect();
+    }
+  });
+},{threshold:0.3});
+
+// ════════════════════════════════════════
+// LANGUAGE TOGGLE
+// ════════════════════════════════════════
+let currentLang='en';
+function setLang(lang) {
+  currentLang=lang;
+  document.body.classList.toggle('ko-mode', lang==='ko');
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  document.getElementById('btn-ko').classList.toggle('active', lang==='ko');
+  applyLang();
+}
+function applyLang() {
+  // ko-mode class handles CSS display toggling
+}
+
+// ════════════════════════════════════════
+// SCROLL SYSTEM
+// ════════════════════════════════════════
+function scrollTo(id) {
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+
+// Progress bar
+window.addEventListener('scroll',()=>{
+  const max = document.body.scrollHeight - window.innerHeight;
+  document.getElementById('progress-bar').style.transform = `scaleX(${window.scrollY/max})`;
+  updateNavDots();
+});
+
+// Nav dot active state
+function updateNavDots() {
+  const dots = document.querySelectorAll('.nav-dot');
+  let current = '';
+  dots.forEach(d=>{
+    const sec = document.getElementById(d.dataset.section);
+    if(sec) {
+      const rect = sec.getBoundingClientRect();
+      if(rect.top <= window.innerHeight*0.5 && rect.bottom >= window.innerHeight*0.5) {
+        current = d.dataset.section;
+      }
+    }
+  });
+  dots.forEach(d=>d.classList.toggle('active', d.dataset.section===current));
+}
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const revObs = new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('visible'),i*70);
+      revObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.06, rootMargin:'0px 0px -30px 0px'});
+reveals.forEach(r=>revObs.observe(r));
+
+// ════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════
+document.addEventListener('DOMContentLoaded',()=>{
+  renderOfferings();
+  renderHoliness();
+  renderFeastWheel();
+  renderFeastList();
+  renderJubilee();
+  renderJubileePillars();
+  renderIamDots();
+  iamObserver.observe(document.getElementById('s-iam'));
+  selectFeast(0);
+});
+</script>
+</body>
+</html>
